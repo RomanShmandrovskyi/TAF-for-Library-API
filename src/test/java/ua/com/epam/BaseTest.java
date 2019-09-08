@@ -1,6 +1,7 @@
 package ua.com.epam;
 
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import ua.com.epam.core.client.mysql.MySQLClient;
 import ua.com.epam.core.client.rest.RestClient;
 import ua.com.epam.service.CleanUpService;
@@ -14,6 +15,15 @@ public class BaseTest {
     protected ValidatorFactory validateThat = new ValidatorFactory(client);
     protected ServiceFactory services = new ServiceFactory(client);
     protected CleanUpService clean = new CleanUpService(client, services);
+
+    @BeforeMethod
+    public void reinitialize() {
+        client = new RestClient();
+        testData = new DataFactory();
+        validateThat = new ValidatorFactory(client);
+        services = new ServiceFactory(client);
+        clean = new CleanUpService(client, services);
+    }
 
     @AfterSuite(alwaysRun = true)
     public void closeDBConnection() {

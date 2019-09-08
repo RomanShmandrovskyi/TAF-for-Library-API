@@ -1,4 +1,4 @@
-package ua.com.epam.crud;
+package ua.com.epam.author.crud;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
@@ -7,34 +7,36 @@ import ua.com.epam.entity.author.Author;
 
 import static ua.com.epam.service.config.JsonKeys.AUTHOR_NATIONALITY;
 
-@Test
+@Test(description = "CRUD operations with Author")
 public class CRUDAuthorTest extends BaseTest {
     private Author a = testData.authors().getRandomOne();
 
-    @Test
+    private String updProp = "blabla";
+
+    @Test(description = "Post one Author")
     public void createAuthor() {
         services.author().postAuthor(a).perform();
         validateThat.responseCode().is(201);
         validateThat.responseEntity().equalsTo(a, Author.class);
     }
 
-    @Test(dependsOnMethods = "createAuthor")
+    @Test(description = "Get one Author", dependsOnMethods = "createAuthor")
     public void getAuthor() {
         services.author().getAuthor(a.getAuthorId()).perform();
         validateThat.responseCode().is(200);
         validateThat.responseEntity().equalsTo(a, Author.class);
     }
 
-    @Test(dependsOnMethods = "getAuthor")
+    @Test(description = "Update one Author", dependsOnMethods = "getAuthor")
     public void updateAuthor() {
-        a.setNationality("blabla");
+        a.setNationality(updProp);
 
         services.author().updateAuthor(a.getAuthorId(), a).perform();
         validateThat.responseCode().is(200);
-        validateThat.responseEntity().propertyEqualsTo(AUTHOR_NATIONALITY, "blabla");
+        validateThat.responseEntity().propertyEqualsTo(AUTHOR_NATIONALITY, updProp);
     }
 
-    @Test(dependsOnMethods = "updateAuthor")
+    @Test(description = "Delete one Author", dependsOnMethods = "updateAuthor")
     public void deleteAuthor() {
         services.author().deleteAuthor(a.getAuthorId()).perform();
         validateThat.responseCode().is(204);

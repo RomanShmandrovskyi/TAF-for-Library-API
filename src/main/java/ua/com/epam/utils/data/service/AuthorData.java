@@ -26,7 +26,7 @@ public class AuthorData extends BaseData {
                 log.error("No one author was found! Author table is empty!");
             } else {
                 a = mapResultSetObjToAuthor(resultSet);
-                log.info("Author with authorId = " + a.getAuthorId() + " was found!\n");
+                log.info("Author with authorId = " + a.getAuthorId() + " was found!");
             }
         } catch (SQLException e) {
             log.error("DB access error occurs or method is called on a closed ResultSet!!!");

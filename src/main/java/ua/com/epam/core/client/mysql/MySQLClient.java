@@ -21,7 +21,8 @@ public class MySQLClient {
                 try {
                     Class.forName(props.jdbcDriver());
                     log.debug("Try connect to \'" + props.dbName()
-                            + "\' with user: \'" + props.dbUser() + "\' and password: \'" + props.dbPass() + "\' ...");
+                            + "\' with user: \'" + props.dbUser()
+                            + "\' and password: \'" + props.dbPass() + "\' ...");
 
                     connection = DriverManager.getConnection(props.sqlURL(), props.dbUser(), props.dbPass());
                     log.debug("Connected to \'" + props.dbName() + "\' database successfully!");

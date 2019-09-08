@@ -35,6 +35,8 @@ public class CleanUpService {
                     .deleteAuthor(id)
                     .withForce()
                     .perform());
+
+            log.info("All Authors was successfully cleaned up!");
             return;
         }
 
@@ -58,6 +60,8 @@ public class CleanUpService {
                     .deleteGenre(id)
                     .withForce()
                     .perform());
+
+            log.info("All Genres was successfully cleaned up!");
             return;
         }
 
@@ -81,6 +85,8 @@ public class CleanUpService {
                     .deleteGenre(id)
                     .withForce()
                     .perform());
+
+            log.info("All Books was successfully cleaned up!");
             return;
         }
 

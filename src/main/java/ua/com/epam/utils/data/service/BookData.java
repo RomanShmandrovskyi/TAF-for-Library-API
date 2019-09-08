@@ -26,7 +26,7 @@ public class BookData extends BaseData {
                 log.error("No one book was found! Book table is empty!");
             } else {
                 b = mapResultSetObjToBook(resultSet);
-                log.info("Book with bookId = " + b.getBookId() + " was found!\n");
+                log.info("Book with bookId = " + b.getBookId() + " was found!");
             }
         } catch (SQLException e) {
             log.error("DB access error occurs or method is called on a closed ResultSet!!!");

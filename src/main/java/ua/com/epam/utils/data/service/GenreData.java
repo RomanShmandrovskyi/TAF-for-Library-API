@@ -24,7 +24,7 @@ public class GenreData extends BaseData {
                 log.error("No one genre was found! Genre table is empty!");
             } else {
                 g = mapResultSetObjToGenre(resultSet);
-                log.info("Genre with genreId = " + g.getGenreId() + " was found!\n");
+                log.info("Genre with genreId = " + g.getGenreId() + " was found!");
             }
         } catch (SQLException e) {
             log.error("DB access error occurs or method is called on a closed ResultSet!!!");
