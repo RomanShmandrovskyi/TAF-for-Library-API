@@ -30,6 +30,10 @@ public class AuthorService {
         return new GetObjWithParams(client, GET_ALL_AUTHORS_ARR);
     }
 
+    public GetObjWithParams getAllAuthorsInGenre(long genreId) {
+        return new GetObjWithParams(client, String.format(GET_ALL_AUTHORS_IN_GENRE_ARR, genreId));
+    }
+
     public PostObj postAuthor(Author author) {
         return new PostObj(client, POST_AUTHOR_SINGLE_OBJ, author);
     }

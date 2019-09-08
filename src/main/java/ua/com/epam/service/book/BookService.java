@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import ua.com.epam.core.client.rest.RestClient;
 import ua.com.epam.entity.book.Book;
 import ua.com.epam.service.config.base.*;
-import ua.com.epam.service.book.config.custom.GetBooksOfAuthorArr;
+import ua.com.epam.service.book.config.custom.GetAuthorRelatedDataArr;
 import ua.com.epam.service.config.common.GetObjWithParams;
 
 import java.util.List;
@@ -28,8 +28,8 @@ public class BookService {
         return new GetObjWithParams(client, String.format(GET_ALL_BOOKS_IN_GENRE, genreId));
     }
 
-    public GetBooksOfAuthorArr getAllBooksOfAuthor(long authorId) {
-        return new GetBooksOfAuthorArr(client, String.format(GET_ALL_BOOKS_OF_AUTHOR, authorId));
+    public GetAuthorRelatedDataArr getAllBooksOfAuthor(long authorId) {
+        return new GetAuthorRelatedDataArr(client, String.format(GET_ALL_BOOKS_OF_AUTHOR, authorId));
     }
 
     public GetObj getAllBooksOfAuthorInGenre(long authorId, long genreId) {

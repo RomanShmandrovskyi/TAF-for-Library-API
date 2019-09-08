@@ -3,12 +3,13 @@ package ua.com.epam.service.genre;
 import lombok.AllArgsConstructor;
 import ua.com.epam.core.client.rest.RestClient;
 import ua.com.epam.entity.genre.Genre;
+import ua.com.epam.service.book.config.custom.GetAuthorRelatedDataArr;
+import ua.com.epam.service.config.base.GetObj;
 import ua.com.epam.service.config.base.PostArr;
+import ua.com.epam.service.config.base.PostObj;
+import ua.com.epam.service.config.base.PutObj;
 import ua.com.epam.service.config.common.DeleteObjWithForce;
 import ua.com.epam.service.config.common.GetObjWithParams;
-import ua.com.epam.service.config.base.PutObj;
-import ua.com.epam.service.config.base.PostObj;
-import ua.com.epam.service.config.base.GetObj;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,10 @@ public class GenreService {
 
     public GetObj getBookGenre(long bookId) {
         return new GetObj(client, String.format(GET_GENRE_OF_BOOK_OBJ, bookId));
+    }
+
+    public GetAuthorRelatedDataArr getAuthorGenres(long authorId) {
+        return new GetAuthorRelatedDataArr(client, String.format(GET_ALL_AUTHOR_GENRES_ARR, authorId));
     }
 
     public GetObjWithParams getAllGenres() {

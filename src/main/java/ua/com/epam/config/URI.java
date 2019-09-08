@@ -5,6 +5,7 @@ public interface URI {
     String GET_AUTHOR_SINGLE_OBJ = "/api/library/author/%s";
     String GET_AUTHOR_OF_BOOK_OBJ = "/api/library/book/%s/author";
     String GET_ALL_AUTHORS_ARR = "/api/library/authors";
+    String GET_ALL_AUTHORS_IN_GENRE_ARR = "/api/library/genre/%s/authors";
     String POST_AUTHOR_SINGLE_OBJ = "/api/library/author/new";
     String PUT_AUTHOR_SINGLE_OBJ = "/api/library/author/%s/update";
     String DELETE_AUTHOR_SINGLE_OBJ = "/api/library/author/%s/delete";
@@ -12,6 +13,7 @@ public interface URI {
     //Genre
     String GET_GENRE_OF_BOOK_OBJ = "/api/library/book/%s/genre";
     String GET_GENRE_SINGLE_OBJ = "/api/library/genre/%s";
+    String GET_ALL_AUTHOR_GENRES_ARR = "/api/library/author/%s/genres";
     String GET_ALL_GENRES_ARR = "/api/library/genres";
     String POST_GENRE_SINGLE_OBJ = "/api/library/genre/new";
     String PUT_GENRE_SINGLE_OBJ = "/api/library/genre/%s/update";
