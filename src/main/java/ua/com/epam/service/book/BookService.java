@@ -6,6 +6,7 @@ import ua.com.epam.entity.book.Book;
 import ua.com.epam.service.config.base.*;
 import ua.com.epam.service.book.config.custom.GetAuthorRelatedDataArr;
 import ua.com.epam.service.config.common.GetObjWithParams;
+import ua.com.epam.service.config.common.SearchForObjArr;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,10 @@ public class BookService {
 
     public GetObjWithParams getAllBooks() {
         return new GetObjWithParams(client, GET_ALL_BOOKS_ARR);
+    }
+
+    public SearchForObjArr searchForBooks() {
+        return new SearchForObjArr(client, SEARCH_FOR_EXISTED_GENRES_ARR);
     }
 
     public GetObjWithParams getAllBooksInGenre(long genreId) {

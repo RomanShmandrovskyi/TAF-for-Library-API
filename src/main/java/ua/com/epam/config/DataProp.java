@@ -20,6 +20,14 @@ public class DataProp {
         }
     }
 
+    private String dbHost() {
+        return props.getProperty(DB_HOST);
+    }
+
+    private int dbPort() {
+        return Integer.parseInt(props.getProperty(DB_PORT));
+    }
+
     public String apiHost() {
         return props.getProperty(API_HOST);
     }
@@ -34,14 +42,6 @@ public class DataProp {
 
     public String dbName() {
         return props.getProperty(DB_NAME);
-    }
-
-    public String dbHost() {
-        return props.getProperty(DB_HOST);
-    }
-
-    public int dbPort() {
-        return Integer.parseInt(props.getProperty(DB_PORT));
     }
 
     public String dbUser() {

@@ -30,6 +30,10 @@ public class AuthorService {
         return new GetObjWithParams(client, GET_ALL_AUTHORS_ARR);
     }
 
+    public SearchForObjArr searchForAuthors() {
+        return new SearchForObjArr(client, SEARCH_FOR_EXISTED_AUTHORS_ARR);
+    }
+
     public GetObjWithParams getAllAuthorsInGenre(long genreId) {
         return new GetObjWithParams(client, String.format(GET_ALL_AUTHORS_IN_GENRE_ARR, genreId));
     }

@@ -10,6 +10,7 @@ import ua.com.epam.service.config.base.PostObj;
 import ua.com.epam.service.config.base.PutObj;
 import ua.com.epam.service.config.common.DeleteObjWithForce;
 import ua.com.epam.service.config.common.GetObjWithParams;
+import ua.com.epam.service.config.common.SearchForObjArr;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +35,10 @@ public class GenreService {
 
     public GetObjWithParams getAllGenres() {
         return new GetObjWithParams(client, GET_ALL_GENRES_ARR);
+    }
+
+    public SearchForObjArr searchForGenres() {
+        return new SearchForObjArr(client, SEARCH_FOR_EXISTED_BOOKS_ARR);
     }
 
     public PostObj postGenre(Genre genre) {

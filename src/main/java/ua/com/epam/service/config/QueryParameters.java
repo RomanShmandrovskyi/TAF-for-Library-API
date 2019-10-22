@@ -9,4 +9,5 @@ public interface QueryParameters {
     String SORT_BY_PARAM_NAME = "sortBy";
     String ASCENDING = "asc";
     String DESCENDING = "desc";
+    String SEARCH_QUERY = "query";
 }
