@@ -19,6 +19,7 @@ public class CleanUpService {
     private ServiceFactory services;
 
     public void authors() {
+        System.out.println("\n=======================================================================");
         log.info("Start to get all authors...");
 
         services.author().getAllAuthors()
@@ -44,6 +45,7 @@ public class CleanUpService {
     }
 
     public void genres() {
+        System.out.println("\n=======================================================================");
         log.info("Start to get all genres...");
 
         services.genre().getAllGenres()
@@ -69,6 +71,7 @@ public class CleanUpService {
     }
 
     public void books() {
+        System.out.println("\n=======================================================================");
         log.info("Start to get all books...");
 
         services.book().getAllBooks()

@@ -3,15 +3,15 @@ package ua.com.epam.utils.validator;
 import com.google.common.collect.Ordering;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jayway.jsonpath.JsonPath;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.json.JSONArray;
 import ua.com.epam.core.client.rest.RestClient;
 import ua.com.epam.utils.helpers.LocalDateAdapter;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,31 +30,23 @@ public class ArrayValidator {
         return this;
     }
 
-    public ArrayValidator isOrderedBy(String sortKey, String order) {
+    public <T> ArrayValidator isOrderedBy(String valueKey, String order, Class<T> clazz) {
         String body = client.getResponse().getBody();
-        List<String> valuesToCheck = getValuesByKey(sortKey, body);
-        List<Long> longs;
-        List<LocalDate> dates;
+        JSONArray arr = new JSONArray(body);
 
+        List<T> objs = IntStream.range(0, arr.length())
+                .mapToObj(arr::getJSONObject)
+                .map(jObj -> g.fromJson(jObj.toString(), clazz))
+                .collect(Collectors.toList());
+
+        List valuesToCheck = getValuesFromList(valueKey, objs);
         if (valuesToCheck.size() == 0) {
             log.info("JSON Array is empty!");
             return this;
         }
 
-        String val = valuesToCheck.get(0);
-        try {
-            Long.parseLong(val);
-            longs = mapToLong(valuesToCheck);
-            checkOrdering(longs, order);
-        } catch (NumberFormatException e) {
-            try {
-                LocalDate.parse(val);
-                dates = mapToDate(valuesToCheck);
-                checkOrdering(dates, order);
-            } catch (DateTimeParseException e1) {
-                checkOrdering(valuesToCheck, order);
-            }
-        }
+        checkOrdering(valuesToCheck, order);
+
         return this;
     }
 
@@ -180,23 +172,35 @@ public class ArrayValidator {
         return this;
     }
 
-    private List<String> getValuesByKey(String key, String json) {
-        return new JSONArray(json).toList()
-                .stream()
-                .map(o -> JsonPath.read(o, "$." + key).toString())
-                .collect(Collectors.toList());
-    }
+    private <T> List getValuesFromList(String key, List<T> objects) {
+        String[] keys = key.split("\\.");
+        int len = keys.length;
+        List<Object> values = new ArrayList<>();
 
-    private List<Long> mapToLong(List<String> values) {
-        return values.stream()
-                .map(Long::valueOf)
-                .collect(Collectors.toList());
-    }
+        for (T val : objects) {
+            Object objToGetFrom = val;
+            Class clazz = val.getClass();
+            try {
+                Field field = null;
+                for (int i = 0; i < len; i++) {
+                    field = clazz.getDeclaredField(keys[i]);
+                    field.setAccessible(true);
+                    clazz = field.getType();
+                    if (i < len - 1) {
+                        objToGetFrom = field.get(objToGetFrom);
+                    }
+                }
 
-    private List<LocalDate> mapToDate(List<String> values) {
-        return values.stream()
-                .map(LocalDate::parse)
-                .collect(Collectors.toList());
+                if (field != null) {
+                    values.add(field.get(objToGetFrom));
+                    field.setAccessible(false);
+                }
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return values;
     }
 
     private void checkOrdering(List values, String order) {
