@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Log4j
+@SuppressWarnings("unchecked")
 public class ArrayValidator {
     private RestClient client;
     private Gson g;
@@ -189,9 +190,11 @@ public class ArrayValidator {
                     if (i < len - 1) {
                         objToGetFrom = field.get(objToGetFrom);
                     }
+                    field.setAccessible(false);
                 }
 
                 if (field != null) {
+                    field.setAccessible(true);
                     values.add(field.get(objToGetFrom));
                     field.setAccessible(false);
                 }
@@ -203,7 +206,7 @@ public class ArrayValidator {
         return values;
     }
 
-    private void checkOrdering(List values, String order) {
+    private void checkOrdering(List<? extends Comparable> values, String order) {
         if (order.equals("asc")) {
             if (!Ordering.natural().isOrdered(values)) {
                 log.error("!!! Objects are not ordering in ascending order !!!");
