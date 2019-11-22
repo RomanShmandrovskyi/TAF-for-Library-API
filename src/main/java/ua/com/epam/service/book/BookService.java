@@ -52,8 +52,8 @@ public class BookService {
         return new PostArr(client, String.format(POST_BOOK_SINGLE_OBJ, authorId, genreId), objs);
     }
 
-    public PutObj updateBook(long bookId, Book updated) {
-        return new PutObj(client, String.format(PUT_BOOK_SINGLE_OBJ, bookId), updated);
+    public PutObj updateBook(Book updated) {
+        return new PutObj(client, PUT_BOOK_SINGLE_OBJ, updated);
     }
 
     public DeleteObj deleteBook(long bookId) {

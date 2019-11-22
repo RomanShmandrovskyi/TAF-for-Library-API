@@ -37,7 +37,7 @@ public class BookData extends BaseData {
         return b;
     }
 
-    public List<Book> getDefaulBooks() {
+    public List<Book> getDefault() {
         log.info("Try to find first 10 books...");
         execute(String.format(SELECT_DEFAULTS, dp.dbName(), BOOK, BOOK_ID));
         List<Book> books = new ArrayList<>();

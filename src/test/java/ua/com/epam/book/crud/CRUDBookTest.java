@@ -42,7 +42,7 @@ public class CRUDBookTest extends BaseTest {
     public void updateBook() {
         b.setBookDescription(updProp);
 
-        services.book().updateBook(b.getBookId(), b).perform();
+        services.book().updateBook(b).perform();
         validateThat.responseCode().is(200);
         validateThat.responseEntity().propertyEqualsTo(BOOK_DESCRIPTION, updProp);
     }

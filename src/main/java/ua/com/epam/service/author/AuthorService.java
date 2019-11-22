@@ -49,8 +49,8 @@ public class AuthorService {
         return new PostArr(client, POST_AUTHOR_SINGLE_OBJ, objs);
     }
 
-    public PutObj updateAuthor(long authorId, Author updated) {
-        return new PutObj(client, String.format(PUT_AUTHOR_SINGLE_OBJ, authorId), updated);
+    public PutObj updateAuthor(Author updated) {
+        return new PutObj(client, PUT_AUTHOR_SINGLE_OBJ, updated);
     }
 
     public DeleteObjWithForce deleteAuthor(long authorId) {

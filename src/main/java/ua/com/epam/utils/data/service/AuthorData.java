@@ -38,7 +38,7 @@ public class AuthorData extends BaseData {
     }
 
     //return 10 authors sortedBy authorId in ascending order
-    public List<Author> getDefaultAuthors() {
+    public List<Author> getDefault() {
         log.info("Try to find first 10 authors...");
         execute(String.format(SELECT_DEFAULTS, dp.dbName(), AUTHOR, AUTHOR_ID));
         List<Author> authors = new ArrayList<>();

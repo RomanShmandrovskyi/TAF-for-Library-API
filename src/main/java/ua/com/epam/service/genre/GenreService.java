@@ -52,8 +52,8 @@ public class GenreService {
         return new PostArr(client, POST_GENRE_SINGLE_OBJ, objs);
     }
 
-    public PutObj updateGenre(long genreId, Genre genre) {
-        return new PutObj(client, String.format(PUT_GENRE_SINGLE_OBJ, genreId), genre);
+    public PutObj updateGenre(Genre genre) {
+        return new PutObj(client, PUT_GENRE_SINGLE_OBJ, genre);
     }
 
     public DeleteObjWithForce deleteGenre(long genreId) {

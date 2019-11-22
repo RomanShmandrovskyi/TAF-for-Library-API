@@ -31,7 +31,7 @@ public class CRUDAuthorTest extends BaseTest {
     public void updateAuthor() {
         a.setNationality(updProp);
 
-        services.author().updateAuthor(a.getAuthorId(), a).perform();
+        services.author().updateAuthor(a).perform();
         validateThat.responseCode().is(200);
         validateThat.responseEntity().propertyEqualsTo(AUTHOR_NATIONALITY, updProp);
     }

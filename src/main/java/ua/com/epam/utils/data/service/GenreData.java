@@ -35,7 +35,7 @@ public class GenreData extends BaseData {
         return g;
     }
 
-    public List<Genre> getDefaultGenres() {
+    public List<Genre> getDefault() {
         log.info("Try to find first 10 genres...");
         execute(String.format(SELECT_DEFAULTS, dp.dbName(), GENRE, GENRE_ID));
         List<Genre> genres = new ArrayList<>();
